@@ -23,7 +23,7 @@ public class UserController {
         System.out.println("USER CONTROLLER LOADED");
     }
 
-    @GetMapping("/users2")
+    @GetMapping("/users3")
     @ResponseBody
     public String test() {
         return "WORKS";
