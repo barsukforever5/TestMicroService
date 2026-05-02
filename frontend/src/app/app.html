@@ -6,6 +6,7 @@
 <input [(ngModel)]="newUser.age" placeholder="age" type="number">
 
 <button (click)="addUser()">Add</button>
+<button (click)="saveUser()">Save</button>
 
 <hr>
 
@@ -15,9 +16,9 @@
     <th>Name</th>
     <th>Age</th>
     <th>Key</th>
+    <th>Actions</th>
   </tr>
   </thead>
-
 
   <tbody>
 
@@ -25,6 +26,11 @@
     <td>{{ u.name }}</td>
     <td>{{ u.age ?? '—' }}</td>
     <td>{{ u.key }}</td>
+
+    <td>
+      <button (click)="deleteUser(u.key)">Delete</button>
+      <button (click)="editUser(u)">Edit</button>
+    </td>
   </tr>
   </tbody>
 </table>

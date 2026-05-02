@@ -30,11 +30,13 @@ public class UserController {
 
     @PostMapping("/users/create")
     public User create(@RequestBody User user) {
+        System.out.println("USER CREATE IS CALLED");
         return service.create(user);
     }
 
     @DeleteMapping("/users/{key}")
     public void delete(@PathVariable String key) {
+        System.out.println("USER DELETE IS CALLED : " + key);
         service.delete(key);
     }
 }

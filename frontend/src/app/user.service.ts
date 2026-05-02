@@ -15,6 +15,14 @@ export class UserService {
   }
 
   createUser(user: any) {
-    return this.http.post('http://localhost:8080/api/users/create', user);
+    return this.http.post<any>(`http://localhost:8080/api/users/create`, user);
+  }
+
+  deleteUser(key: string) {
+    return this.http.delete(`http://localhost:8080/api/users/${key}`);
+  }
+
+  updateUser(key: string, user: any) {
+    return this.http.put<any>(`http://localhost:8080/api/users/${key}`, user);
   }
 }
