@@ -3,15 +3,16 @@ package org.example.controller;
 import jakarta.annotation.PostConstruct;
 import org.example.User;
 import org.example.UserService;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@CrossOrigin(origins = "http://localhost:4200")
+@RestController
+@RequestMapping("/api")
 public class UserController {
+
     private final UserService service;
 
     public UserController(UserService service) {
@@ -30,9 +31,8 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public String list(Model model) {
-        model.addAttribute("users", service.findAll());
-        return "users";
+    public List<User> list(Model model) {
+        return service.findAll();
     }
 
     @PostMapping("/users/create")

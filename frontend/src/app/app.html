@@ -1,0 +1,21 @@
+<h1>Users</h1>
+
+<table border="1" cellpadding="8">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Age</th>
+    <th>Key</th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+
+  <tr *ngFor="let u of users">
+    <td>{{ u.name }}</td>
+    <td>{{ u.age ?? '—' }}</td>
+    <td>{{ u.key }}</td>
+  </tr>
+  </tbody>
+</table>
