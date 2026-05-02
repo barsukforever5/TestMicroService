@@ -13,4 +13,8 @@ export class UserService {
   getUsers() {
     return this.http.get<any[]>(this.api);
   }
+
+  createUser(user: any) {
+    return this.http.post('http://localhost:8080/api/users/create', user);
+  }
 }

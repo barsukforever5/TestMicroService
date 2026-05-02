@@ -39,12 +39,14 @@ public class UserService {
         return result;
     }
 
-    public void create(User user) {
+    public User create(User user) {
         BaseDocument doc = new BaseDocument();
         doc.addAttribute("name", user.getName());
         doc.addAttribute("age", user.getAge());
 
         db().collection("users").insertDocument(doc);
+
+        return user;
     }
 
     public void delete(String key) {

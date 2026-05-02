@@ -3,7 +3,6 @@ package org.example.controller;
 import jakarta.annotation.PostConstruct;
 import org.example.User;
 import org.example.UserService;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,30 +23,18 @@ public class UserController {
         System.out.println("USER CONTROLLER LOADED");
     }
 
-    @GetMapping("/users4")
-    @ResponseBody
-    public String test() {
-        return "WORKS";
-    }
-
     @GetMapping("/users")
-    public List<User> list(Model model) {
+    public List<User> list() {
         return service.findAll();
     }
 
     @PostMapping("/users/create")
-    public String create(@RequestParam String name,
-                         @RequestParam int age) {
-        User u = new User();
-        u.setName(name);
-        u.setAge(age);
-        service.create(u);
-        return "redirect:/users";
+    public User create(@RequestBody User user) {
+        return service.create(user);
     }
 
-    @GetMapping("/users/delete")
-    public String delete(@RequestParam String key) {
+    @DeleteMapping("/users/{key}")
+    public void delete(@PathVariable String key) {
         service.delete(key);
-        return "redirect:/users";
     }
 }

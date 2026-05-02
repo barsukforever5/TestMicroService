@@ -1,5 +1,14 @@
 <h1>Users</h1>
 
+<h3>Add user</h3>
+
+<input [(ngModel)]="newUser.name" placeholder="name">
+<input [(ngModel)]="newUser.age" placeholder="age" type="number">
+
+<button (click)="addUser()">Add</button>
+
+<hr>
+
 <table border="1" cellpadding="8">
   <thead>
   <tr>
@@ -9,8 +18,8 @@
   </tr>
   </thead>
 
-  <tbody>
 
+  <tbody>
 
   <tr *ngFor="let u of users">
     <td>{{ u.name }}</td>
