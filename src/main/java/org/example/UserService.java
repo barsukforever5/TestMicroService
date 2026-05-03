@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -40,11 +41,15 @@ public class UserService {
     }
 
     public User create(User user) {
-        BaseDocument doc = new BaseDocument();
+        String key = UUID.randomUUID().toString();
+        BaseDocument doc = new BaseDocument(key);
         doc.addAttribute("name", user.getName());
         doc.addAttribute("age", user.getAge());
 
         db().collection("users").insertDocument(doc);
+        System.out.println("DOC.GET_KEY() : " + doc.getKey());
+
+        user.setKey(doc.getKey());
 
         return user;
     }

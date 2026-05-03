@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserService } from './user.service';
 import { FormsModule } from '@angular/forms';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -13,13 +14,18 @@ export class AppComponent implements OnInit {
 
   users: any[] = [];
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.userService.getUsers().subscribe({
       next: (data) => {
         console.log('✅ USERS FROM API:', data);
-        this.users = data;
+        this.users = [...data];
+
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error('❌ HTTP ERROR:', err);

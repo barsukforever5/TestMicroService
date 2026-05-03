@@ -31,7 +31,9 @@ public class UserController {
     @PostMapping("/users/create")
     public User create(@RequestBody User user) {
         System.out.println("USER CREATE IS CALLED");
-        return service.create(user);
+        User u = service.create(user);
+        System.out.println("USER : " + u);
+        return u;
     }
 
     @DeleteMapping("/users/{key}")
