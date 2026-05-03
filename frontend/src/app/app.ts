@@ -20,17 +20,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userService.getUsers().subscribe({
-      next: (data) => {
-        console.log('✅ USERS FROM API:', data);
-        this.users = [...data];
-
-        this.cdr.detectChanges();
-      },
-      error: (err) => {
-        console.error('❌ HTTP ERROR:', err);
-      }
-    });
+    this.refresh();
   }
 
   newUser = {
@@ -52,6 +42,8 @@ export class AppComponent implements OnInit {
       this.editKey = null;
       console.log('UPDATED USERS after ADD:', this.users);
     });
+
+    setTimeout(() => {this.refresh();}, 100);
   }
 
   deleteUser(key: string) {
@@ -59,6 +51,8 @@ export class AppComponent implements OnInit {
       this.users = this.users.filter(u => u.key !== key);
       console.log('UPDATED USERS after DELETE:', this.users);
     });
+
+    setTimeout(() => {this.refresh();}, 100);
   }
 
   editKey: string | null = null;
@@ -78,10 +72,26 @@ export class AppComponent implements OnInit {
 
         this.cancelEdit();
       });
+
+    setTimeout(() => {this.refresh();}, 100);
   }
 
   cancelEdit() {
     this.newUser = { name: '', age: null };
     this.editKey = null;
+  }
+
+  refresh(){
+    this.userService.getUsers().subscribe({
+      next: (data) => {
+        console.log('✅ USERS FROM API:', data);
+        this.users = [...data];
+
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('❌ HTTP ERROR:', err);
+      }
+    });
   }
 }
