@@ -47,7 +47,7 @@ public class UserService {
         doc.addAttribute("age", user.getAge());
 
         db().collection("users").insertDocument(doc);
-        System.out.println("DOC.GET_KEY() : " + doc.getKey());
+        System.out.println("DOC.GET_KEY : " + doc.getKey());
 
         user.setKey(doc.getKey());
 
@@ -56,5 +56,10 @@ public class UserService {
 
     public void delete(String key) {
         db().collection("users").deleteDocument(key);
+    }
+
+    public void update(String key, User user) {
+        System.out.println("UPDATE USER : " + key);
+        db().collection("users").updateDocument(key, user);
     }
 }

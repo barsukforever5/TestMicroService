@@ -41,4 +41,11 @@ public class UserController {
         System.out.println("USER DELETE IS CALLED : " + key);
         service.delete(key);
     }
+
+    @PutMapping("/users/{key}")
+    public void update(@PathVariable String key, @RequestBody User user) {
+        System.out.println("USER UPDATE IS CALLED : " + key);
+        service.update(key, user);
+    }
+
 }
